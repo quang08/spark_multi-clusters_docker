@@ -36,15 +36,16 @@ services:
 
   spark-worker:
     # container_name: da_spark_worker
+    image: da-spark-image
     entrypoint: ["entrypoint.sh", "worker"]
     depends_on:
-      - spark_master
+      - spark-master
     env_file:
-      - .env .spark
+      - .env.spark
     volumes:
       - ./book_data:/opt/spark/data
       - ./spark-apps:/opt/spark/apps
       - spark-logs:/opt/spark/spark-events
 
-  volumes:
-    spark-logs:
+volumes:
+  spark-logs:
